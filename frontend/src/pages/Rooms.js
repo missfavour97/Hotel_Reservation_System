@@ -4,6 +4,8 @@ import RoomCard from "../components/RoomCard";
 import deluxeImage from "../assets/rooms/deluxe/deluxe2.jpg";
 import standardImage from "../assets/rooms/standard/standard1.jpeg";
 import executiveImage from "../assets/rooms/executive/executive1.jpeg";
+import doubleBedImage from "../assets/rooms/doublebed/double_bed1.jpeg";
+import presidentialImage from "../assets/rooms/presidential/presidential1.jpeg";
 
 function Rooms() {
   const rooms = [
@@ -12,6 +14,12 @@ function Rooms() {
       price: 250,
       description: "Comfortable and affordable room for regular guests.",
       image: standardImage,
+    },
+    {
+      title: "Double Bed Room",
+      price: 300,
+      description: "A comfortable room with double bed space, ideal for couples or friends.",
+      image: doubleBedImage,
     },
     {
       title: "Deluxe Room",
@@ -25,6 +33,12 @@ function Rooms() {
       description: "Luxury room designed for business and VIP guests.",
       image: executiveImage,
     },
+    {
+      title: "Presidential Suite",
+      price: 1200,
+      description: "Exclusive luxury suite with premium amenities and executive comfort.",
+      image: presidentialImage,
+  },
   ];
 
   return (
@@ -35,7 +49,7 @@ function Rooms() {
 
       <Grid container spacing={4}>
         {rooms.map((room, index) => (
-          <Grid item xs={12} md={4} key={index}>
+          <Grid item xs={12} sm={6} md={4} key={index}>
             <RoomCard
               image={room.image}
               title={room.title}
