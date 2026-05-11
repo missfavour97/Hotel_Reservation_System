@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardMedia,
@@ -33,7 +34,12 @@ function RoomCard({ image, title, price, description }) {
       </CardContent>
 
       <CardActions>
-        <Button variant="contained" fullWidth>
+        <Button 
+        variant="contained"
+          fullWidth
+          component={Link}
+          to="/room-details"
+         >
           View Details
         </Button>
       </CardActions>
