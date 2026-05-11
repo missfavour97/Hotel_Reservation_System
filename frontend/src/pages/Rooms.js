@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Container, Grid } from "@mui/material";
+
 import RoomCard from "../components/RoomCard";
+import { getRooms } from "../services/roomService";
+
 import deluxeImage from "../assets/rooms/deluxe/deluxe2.jpg";
 import standardImage from "../assets/rooms/standard/standard1.jpeg";
 import executiveImage from "../assets/rooms/executive/executive1.jpeg";
@@ -8,38 +11,55 @@ import doubleBedImage from "../assets/rooms/doublebed/double_bed1.jpeg";
 import presidentialImage from "../assets/rooms/presidential/presidential1.jpeg";
 
 function Rooms() {
-  const rooms = [
-    {
-      title: "Standard Room",
-      price: 250,
-      description: "Comfortable and affordable room for regular guests.",
-      image: standardImage,
-    },
-    {
-      title: "Double Bed Room",
-      price: 300,
-      description: "A comfortable room with double bed space, ideal for couples or friends.",
-      image: doubleBedImage,
-    },
-    {
-      title: "Deluxe Room",
-      price: 500,
-      description: "Spacious room with elegant interior and premium comfort.",
-      image: deluxeImage,
-    },
-    {
-      title: "Executive Room",
-      price: 750,
-      description: "Luxury room designed for business and VIP guests.",
-      image: executiveImage,
-    },
-    {
-      title: "Presidential Suite",
-      price: 1200,
-      description: "Exclusive luxury suite with premium amenities and executive comfort.",
-      image: presidentialImage,
-  },
-  ];
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() => {
+    async function fetchRooms() {
+      try {
+        const data = await getRooms();
+
+        const mappedRooms = data.map((room) => {
+          let image;
+
+          switch (room.title) {
+            case "Standard Room":
+              image = standardImage;
+              break;
+
+            case "Double Bed Room":
+              image = doubleBedImage;
+              break;
+
+            case "Deluxe Room":
+              image = deluxeImage;
+              break;
+
+            case "Executive Room":
+              image = executiveImage;
+              break;
+
+            case "Presidential Suite":
+              image = presidentialImage;
+              break;
+
+            default:
+              image = standardImage;
+          }
+
+          return {
+            ...room,
+            image,
+          };
+        });
+
+        setRooms(mappedRooms);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchRooms();
+  }, []);
 
   return (
     <Container sx={{ marginTop: 5 }}>

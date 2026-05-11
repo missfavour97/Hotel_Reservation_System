@@ -31,14 +31,14 @@ function RoomDetails() {
   const rooms = {
     "standard-room": {
       title: "Standard Room",
-      price: 80,
+      price: 250,
       description: "Comfortable and affordable room for regular guests.",
       images: [standardMain, standardBath],
     },
 
     "double-bed-room": {
       title: "Double Bed Room",
-      price: 120,
+      price: 300,
       description:
         "A comfortable room with double bed space, ideal for couples or friends.",
       images: [doubleMain, doubleBath],
@@ -46,7 +46,7 @@ function RoomDetails() {
 
     "deluxe-room": {
       title: "Deluxe Room",
-      price: 180,
+      price: 500,
       description:
         "Spacious room with elegant interior and premium comfort.",
       images: [deluxeMain, deluxeBath],
@@ -54,7 +54,7 @@ function RoomDetails() {
 
     "executive-room": {
       title: "Executive Room",
-      price: 300,
+      price: 700,
       description:
         "Luxury room designed for business and VIP guests.",
       images: [executiveMain, executiveBath],
@@ -62,7 +62,7 @@ function RoomDetails() {
 
     "presidential-suite": {
       title: "Presidential Suite",
-      price: 600,
+      price: 1200,
       description:
         "Exclusive luxury suite with premium amenities and executive comfort.",
       images: [presidentialMain, presidentialBath, presidentialLiving],
