@@ -38,7 +38,7 @@ function RoomCard({ image, title, price, description }) {
         variant="contained"
           fullWidth
           component={Link}
-          to="/room-details"
+          to={`/rooms/${title.toLowerCase().replace(/\s+/g, "-")}`}
          >
           View Details
         </Button>
