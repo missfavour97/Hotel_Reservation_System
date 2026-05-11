@@ -1,8 +1,9 @@
 import React from "react";
-import Home from "./pages/Home";
+import Rooms from "./pages/Rooms";
+
 
 function App() {
-  return <Home />;
+  return <Rooms />;
 }
 
 export default App;
