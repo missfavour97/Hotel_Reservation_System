@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   Card,
   CardMedia,
@@ -7,42 +6,69 @@ import {
   CardActions,
   Typography,
   Button,
+  Box,
 } from "@mui/material";
+
+import { Link } from "react-router-dom";
 
 function RoomCard({ image, title, price, description }) {
   return (
-    <Card sx={{ borderRadius: 3, boxShadow: 4 }}>
+    <Card
+      sx={{
+        display: "flex",
+        mb: 4,
+        borderRadius: 3,
+        boxShadow: 4,
+        overflow: "hidden",
+      }}
+    >
       <CardMedia
         component="img"
-        height="220"
         image={image}
         alt={title}
+        sx={{
+          width: 420,
+          height: 280,
+          objectFit: "cover",
+        }}
       />
 
-      <CardContent>
-        <Typography variant="h5" fontWeight="bold">
-          {title}
-        </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          flex: 1,
+          justifyContent: "space-between",
+        }}
+      >
+        <CardContent>
+          <Typography variant="h4" fontWeight="bold">
+            {title}
+          </Typography>
 
-        <Typography variant="body2" color="text.secondary" sx={{ my: 1 }}>
-          {description}
-        </Typography>
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{ my: 2 }}
+          >
+            {description}
+          </Typography>
 
-        <Typography variant="h6" color="primary">
-          ${price} / night
-        </Typography>
-      </CardContent>
+          <Typography variant="h5" color="primary">
+            ${price} / night
+          </Typography>
+        </CardContent>
 
-      <CardActions>
-        <Button 
-        variant="contained"
-          fullWidth
-          component={Link}
-          to={`/rooms/${title.toLowerCase().replace(/\s+/g, "-")}`}
-         >
-          View Details
-        </Button>
-      </CardActions>
+        <CardActions sx={{ p: 2 }}>
+          <Button
+            variant="contained"
+            component={Link}
+            to={`/rooms/${title.toLowerCase().replace(/\s+/g, "-")}`}
+          >
+            View Details
+          </Button>
+        </CardActions>
+      </Box>
     </Card>
   );
 }

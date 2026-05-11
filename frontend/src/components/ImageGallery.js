@@ -17,7 +17,7 @@ function ImageGallery({ images }) {
         alt="Main room"
         sx={{
           width: "100%",
-          height: 420,
+          height: 600,
           objectFit: "cover",
           borderRadius: 3,
         }}
@@ -32,7 +32,7 @@ function ImageGallery({ images }) {
             alt={`Room view ${index + 1}`}
             sx={{
               width: "100%",
-              height: 200,
+              height: 290,
               objectFit: "cover",
               borderRadius: 3,
             }}

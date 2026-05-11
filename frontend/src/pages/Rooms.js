@@ -49,7 +49,7 @@ function Rooms() {
 
       <Grid container spacing={4}>
         {rooms.map((room, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
+          <Grid item xs={12} key={index}>
             <RoomCard
               image={room.image}
               title={room.title}
