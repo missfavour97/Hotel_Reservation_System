@@ -5,6 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite("Data Source=hotel.db"));
 
+builder.Services.AddControllers();
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -20,6 +22,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapControllers();
 
 var summaries = new[]
 {
@@ -40,6 +44,42 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast")
 .WithOpenApi();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    if (!db.Rooms.Any())
+    {
+        db.Rooms.AddRange(
+            new backend.Models.Room
+            {
+                Title = "Standard Room",
+                Description = "Comfortable and affordable room.",
+                Price = 80,
+                ImageUrl = "standard1.jpeg"
+            },
+
+            new backend.Models.Room
+            {
+                Title = "Deluxe Room",
+                Description = "Spacious deluxe room with premium comfort.",
+                Price = 180,
+                ImageUrl = "deluxe2.jpg"
+            },
+
+            new backend.Models.Room
+            {
+                Title = "Executive Room",
+                Description = "Luxury room designed for VIP guests.",
+                Price = 300,
+                ImageUrl = "executive1.jpeg"
+            }
+        );
+
+        db.SaveChanges();
+    }
+}
 
 app.Run();
 
