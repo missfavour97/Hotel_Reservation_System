@@ -4,9 +4,13 @@ import {
   TextField,
   Button,
   Typography,
+  Alert,
+  Snackbar,
 } from "@mui/material";
 
-function BookingForm({ roomTitle }) {
+function BookingForm({ roomTitle, roomId }) {
+  const [successOpen, setSuccessOpen] = useState(false);
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -33,12 +37,12 @@ function BookingForm({ roomTitle }) {
         },
         body: JSON.stringify({
           ...formData,
-          roomId: 1,
+          roomId: roomId,
         }),
       });
 
       if (response.ok) {
-        alert("Booking successful!");
+        setSuccessOpen(true);
 
         setFormData({
           fullName: "",
@@ -54,63 +58,97 @@ function BookingForm({ roomTitle }) {
   }
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      sx={{
-        mt: 5,
-        display: "flex",
-        flexDirection: "column",
-        gap: 3,
-      }}
-    >
-      <Typography variant="h4" fontWeight="bold">
-        Book This Room
-      </Typography>
+    <>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          mt: 2,
+          display: "flex",
+          flexDirection: "column",
+          gap: 3,
+        }}
+      >
+        <Typography variant="h4" fontWeight="bold">
+          Book This Room
+        </Typography>
 
-      <TextField
-        label="Full Name"
-        name="fullName"
-        value={formData.fullName}
-        onChange={handleChange}
-        required
-      />
+        <Typography
+          variant="h6"
+          color="text.secondary"
+        >
+          Selected Room: {roomTitle}
+        </Typography>
 
-      <TextField
-        label="Email"
-        name="email"
-        type="email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-      />
-       <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+        <TextField
+          label="Full Name"
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleChange}
+          required
+        />
+
+        <TextField
+          label="Email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+
+        <Box sx={{ display: "flex", gap: 2 }}>
           <TextField
-               fullWidth
-              type="date"
-              helperText="Check-in Date"
-      />
+            fullWidth
+            type="date"
+            helperText="Check-in Date"
+            name="checkInDate"
+            value={formData.checkInDate}
+            onChange={handleChange}
+          />
 
-           <TextField
-              fullWidth
-             type="date"
-             helperText="Check-out Date"
-      />
-       </Box>
+          <TextField
+            fullWidth
+            type="date"
+            helperText="Check-out Date"
+            name="checkOutDate"
+            value={formData.checkOutDate}
+            onChange={handleChange}
+          />
+        </Box>
 
-      <TextField
-        label="Guests"
-        name="guests"
-        type="number"
-        value={formData.guests}
-        onChange={handleChange}
-        required
-      />
+        <TextField
+          label="Guests"
+          name="guests"
+          type="number"
+          value={formData.guests}
+          onChange={handleChange}
+          required
+        />
 
-      <Button type="submit" variant="contained" size="large">
-        Reserve Now
-      </Button>
-    </Box>
+        <Button
+          type="submit"
+          variant="contained"
+          size="large"
+        >
+          Book Now
+        </Button>
+      </Box>
+
+      <Snackbar
+        open={successOpen}
+        autoHideDuration={4000}
+        onClose={() => setSuccessOpen(false)}
+      >
+        <Alert
+          severity="success"
+          variant="filled"
+          onClose={() => setSuccessOpen(false)}
+        >
+          Booking successful!
+        </Alert>
+      </Snackbar>
+    </>
   );
 }
 

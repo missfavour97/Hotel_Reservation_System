@@ -16,7 +16,7 @@ import {
 import { Link } from "react-router-dom";
 import BookingForm from "./BookingForm";
 
-function RoomCard({ image, title, price, description }) {
+function RoomCard({ image, title, price, description, roomId }) {
   const [openBooking, setOpenBooking] = useState(false);
 
   return (
@@ -173,7 +173,8 @@ function RoomCard({ image, title, price, description }) {
       </Box>
 
         <DialogContent>
-           <BookingForm roomTitle={title} />
+           <BookingForm roomTitle={title}
+           roomId={roomId} />
               </DialogContent>
        </Dialog>
      </>
