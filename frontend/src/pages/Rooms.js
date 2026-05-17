@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Container, Grid } from "@mui/material";
+import { Typography, Container, Box } from "@mui/material";
 
 import RoomCard from "../components/RoomCard";
 import { getRooms } from "../services/roomService";
@@ -62,23 +62,29 @@ function Rooms() {
   }, []);
 
   return (
-    <Container sx={{ marginTop: 5 }}>
+    <Container
+      maxWidth={false}
+      sx={{
+        marginTop: 5,
+        px: { xs: 2, md: 8 },
+      }}
+    >
       <Typography variant="h3" fontWeight="bold" sx={{ mb: 4 }}>
-        Our Rooms
+        LuxeStay Rooms and Suites
       </Typography>
 
-      <Grid container spacing={4}>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
         {rooms.map((room, index) => (
-          <Grid item xs={12} key={index}>
+          <Box key={index}>
             <RoomCard
               image={room.image}
               title={room.title}
               price={room.price}
               description={room.description}
             />
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Container>
   );
 }

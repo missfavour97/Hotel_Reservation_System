@@ -1,3 +1,5 @@
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 import React, { useState } from "react";
 import {
   Card,
@@ -40,8 +42,8 @@ function RoomCard({ image, title, price, description }) {
           image={image}
           alt={title}
           sx={{
-                width: { xs: "100%", md: "58%" },
-                height: { xs: 260, md: 260 },
+                width: { xs: "100%", md: "48%" },
+                height: { xs: 260, md: 320 },
                 objectFit: "cover",
               
           }}
@@ -52,11 +54,16 @@ function RoomCard({ image, title, price, description }) {
           sx={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
+            justifyContent: "flex-start",
             flex: 1,
           }}
         >
-          <CardContent sx={{ px: 4, pt: 4 }}>
+          <CardContent 
+          sx={{ 
+             px: 4, 
+             pt: 4, 
+             pb: 2,
+             }}>
             <Typography
               variant="h4"
               fontWeight="500"
@@ -103,7 +110,7 @@ function RoomCard({ image, title, price, description }) {
           <CardActions
              sx={{
                  px: 4,
-                 pb: 3,
+                 pb: 4,
                  pt: 0,
                  display: "flex",
                  gap: 2,
@@ -148,17 +155,29 @@ function RoomCard({ image, title, price, description }) {
 
       {/* BOOKING MODAL */}
       <Dialog
-        open={openBooking}
-        onClose={() => setOpenBooking(false)}
-        maxWidth="md"
-        fullWidth
-      >
+          open={openBooking}
+          onClose={() => setOpenBooking(false)}
+           maxWidth="md"
+           fullWidth
+    >
+      <Box
+          sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              p: 1,
+            }}
+     >
+       <IconButton onClick={() => setOpenBooking(false)}>
+           <CloseIcon />
+              </IconButton>
+      </Box>
+
         <DialogContent>
-          <BookingForm />
-        </DialogContent>
-      </Dialog>
-    </>
-  );
+           <BookingForm roomTitle={title} />
+              </DialogContent>
+       </Dialog>
+     </>
+    );
 }
 
 export default RoomCard;

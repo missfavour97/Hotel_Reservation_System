@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 
-function BookingForm() {
+function BookingForm({ roomTitle }) {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -84,26 +84,19 @@ function BookingForm() {
         onChange={handleChange}
         required
       />
-
-      <TextField
-        label="Check-In Date"
-        name="checkInDate"
-        type="date"
-        value={formData.checkInDate}
-        onChange={handleChange}
-        InputLabelProps={{ shrink: true }}
-        required
+       <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+          <TextField
+               fullWidth
+              type="date"
+              helperText="Check-in Date"
       />
 
-      <TextField
-        label="Check-Out Date"
-        name="checkOutDate"
-        type="date"
-        value={formData.checkOutDate}
-        onChange={handleChange}
-        InputLabelProps={{ shrink: true }}
-        required
+           <TextField
+              fullWidth
+             type="date"
+             helperText="Check-out Date"
       />
+       </Box>
 
       <TextField
         label="Guests"
