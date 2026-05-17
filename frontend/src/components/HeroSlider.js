@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Paper, Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import hero1 from "../assets/hero/hero1.jpeg";
@@ -26,9 +26,6 @@ function HeroSlider() {
         backgroundImage: `url(${images[currentImage]})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        transition: "background-image 1s ease-in-out",
-        display: "flex",
-        alignItems: "center",
         position: "relative",
       }}
     >
@@ -36,30 +33,125 @@ function HeroSlider() {
         sx={{
           position: "absolute",
           inset: 0,
-          backgroundColor: "rgba(0,0,0,0.45)",
+          backgroundColor: "rgba(0,0,0,0.35)",
         }}
       />
 
       <Box
         sx={{
-          position: "relative",
-          zIndex: 2,
+          position: "absolute",
+          top: 30,
+          left: 0,
+          width: "100%",
+          px: 5,
+          zIndex: 5,
           color: "white",
-          px: 10,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          boxSizing: "border-box",
         }}
       >
-        <Typography variant="h2" fontWeight="bold" mb={2}>
-          Luxury Hotel Experience
+        <Typography variant="h4" fontWeight="bold">
+          LuxeStay
         </Typography>
 
-        <Typography variant="h5" mb={4}>
-          Discover elegance, comfort, and premium hospitality.
-        </Typography>
-
-        <Button variant="contained" size="large" component={Link} to="/rooms">
-          Explore Rooms
-        </Button>
+        <Box sx={{ display: "flex", gap: 5, alignItems: "center" }}>
+          <Typography>Hotels & Resorts</Typography>
+          <Typography component={Link} to="/rooms" sx={{ color: "white", textDecoration: "none" }}>
+            Rooms & Suites
+          </Typography>
+          <Typography>Restaurants</Typography>
+          <Typography>Wellness</Typography>
+          <Typography>Events</Typography>
+        </Box>
       </Box>
+
+      <Box
+        sx={{
+          position: "absolute",
+          left: 60,
+          bottom: 170,
+          zIndex: 3,
+          color: "white",
+        }}
+      >
+        <Typography variant="h2" fontWeight="400" sx={{ mb: 2 }}>
+          LuxeStay Istanbul
+        </Typography>
+
+        <Box sx={{ display: "flex", gap: 3 }}>
+          <Typography component={Link} to="/rooms" sx={{ color: "white", textDecoration: "underline" }}>
+            Rooms & Suites
+          </Typography>
+
+          <Typography sx={{ color: "white", textDecoration: "underline" }}>
+            Contact Us
+          </Typography>
+        </Box>
+      </Box>
+
+      <Paper
+        elevation={6}
+        sx={{
+          position: "absolute",
+          left: "50%",
+          bottom: 35,
+          transform: "translateX(-50%)",
+          width: "82%",
+          minHeight: 90,
+          borderRadius: 2,
+          display: "flex",
+          alignItems: "center",
+          overflow: "hidden",
+          zIndex: 4,
+        }}
+      >
+        <Box sx={{ flex: 1, px: 3 }}>
+          <Typography variant="body2" color="text.secondary">
+            Dates
+          </Typography>
+          <Typography variant="h6">Entry - Exit</Typography>
+        </Box>
+
+        <Divider orientation="vertical" flexItem />
+
+        <Box sx={{ flex: 1, px: 3 }}>
+          <Typography variant="body2" color="text.secondary">
+            Room and Guests
+          </Typography>
+          <Typography variant="h6">1 Adult, 0 Children</Typography>
+        </Box>
+
+        <Divider orientation="vertical" flexItem />
+
+        <Box sx={{ flex: 1, px: 3 }}>
+          <Typography variant="body2" color="text.secondary">
+            Code
+          </Typography>
+          <Typography variant="h6">Enter the code</Typography>
+        </Box>
+
+        <Box sx={{ width: 280, p: 1.5 }}>
+          <Button
+            variant="contained"
+            fullWidth
+            component={Link}
+            to="/rooms"
+            sx={{
+              height: 64,
+              backgroundColor: "#26313f",
+              fontSize: "1rem",
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "#1d2631",
+              },
+            }}
+          >
+            Find a Room
+          </Button>
+        </Box>
+      </Paper>
     </Box>
   );
 }

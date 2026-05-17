@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardMedia,
@@ -7,69 +7,157 @@ import {
   Typography,
   Button,
   Box,
+  Dialog,
+  DialogContent,
 } from "@mui/material";
 
 import { Link } from "react-router-dom";
+import BookingForm from "./BookingForm";
 
 function RoomCard({ image, title, price, description }) {
+  const [openBooking, setOpenBooking] = useState(false);
+
   return (
-    <Card
-      sx={{
-        display: "flex",
-        mb: 4,
-        borderRadius: 3,
-        boxShadow: 4,
-        overflow: "hidden",
-      }}
+    <>
+      <Card
+        sx={{
+           display: "flex",
+           flexDirection: { xs: "column", md: "row" },
+           mb: 5,
+           borderRadius: 0,
+           boxShadow: 2,
+           overflow: "hidden",
+           width: "100%",
+           maxWidth: 1280,
+           minHeight: 260,
+           mx: "auto",
+           backgroundColor: "#fff",
+        }}
     >
-      <CardMedia
-        component="img"
-        image={image}
-        alt={title}
-        sx={{
-          width: 420,
-          height: 280,
-          objectFit: "cover",
-        }}
-      />
+        {/* ROOM IMAGE */}
+        <CardMedia
+          component="img"
+          image={image}
+          alt={title}
+          sx={{
+                width: { xs: "100%", md: "58%" },
+                height: { xs: 260, md: 260 },
+                objectFit: "cover",
+              
+          }}
+        />
 
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          flex: 1,
-          justifyContent: "space-between",
-        }}
+        {/* ROOM DETAILS */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            flex: 1,
+          }}
+        >
+          <CardContent sx={{ px: 4, pt: 4 }}>
+            <Typography
+              variant="h4"
+              fontWeight="500"
+              sx={{ mb: 2 }}
+            >
+              {title}
+            </Typography>
+
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              sx={{
+                mb: 4,
+                lineHeight: 1.8,
+              }}
+            >
+              {description}
+            </Typography>
+
+            <Box sx={{ mb: 3 }}>
+              <Typography sx={{ mb: 1 }}>
+                • 2 Guests
+              </Typography>
+
+              <Typography sx={{ mb: 1 }}>
+                • King Size Bed
+              </Typography>
+
+              <Typography>
+                • Free Wi-Fi
+              </Typography>
+            </Box>
+
+            <Typography
+              variant="h4"
+              color="primary"
+              fontWeight="bold"
+            >
+              ${price} / night
+            </Typography>
+          </CardContent>
+
+          {/* BUTTONS */}
+          <CardActions
+             sx={{
+                 px: 4,
+                 pb: 3,
+                 pt: 0,
+                 display: "flex",
+                 gap: 2,
+                    }}
+            >
+            <Button
+              variant="contained"
+              onClick={() => setOpenBooking(true)}
+              sx={{
+                backgroundColor: "#232c39",
+                px: 5,
+                py: 1.5,
+                borderRadius: 0,
+                textTransform: "none",
+                fontSize: "1rem",
+
+                "&:hover": {
+                  backgroundColor: "#1b222d",
+                },
+              }}
+            >
+              Book Now
+            </Button>
+
+            <Button
+              variant="outlined"
+              component={Link}
+              to={`/rooms/${title.toLowerCase().replace(/\s+/g, "-")}`}
+              sx={{
+                px: 5,
+                py: 1.5,
+                borderRadius: 0,
+                textTransform: "none",
+                fontSize: "1rem",
+              }}
+            >
+              View Details
+            </Button>
+          </CardActions>
+        </Box>
+      </Card>
+
+      {/* BOOKING MODAL */}
+      <Dialog
+        open={openBooking}
+        onClose={() => setOpenBooking(false)}
+        maxWidth="md"
+        fullWidth
       >
-        <CardContent>
-          <Typography variant="h4" fontWeight="bold">
-            {title}
-          </Typography>
-
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{ my: 2 }}
-          >
-            {description}
-          </Typography>
-
-          <Typography variant="h5" color="primary">
-            ${price} / night
-          </Typography>
-        </CardContent>
-
-        <CardActions sx={{ p: 2 }}>
-          <Button
-            variant="contained"
-            component={Link}
-            to={`/rooms/${title.toLowerCase().replace(/\s+/g, "-")}`}
-          >
-            View Details
-          </Button>
-        </CardActions>
-      </Box>
-    </Card>
+        <DialogContent>
+          <BookingForm />
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
 
