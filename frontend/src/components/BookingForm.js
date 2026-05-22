@@ -43,6 +43,26 @@ function BookingForm({ roomTitle, roomId }) {
 
       if (response.ok) {
         setSuccessOpen(true);
+        const existingReservations =
+        JSON.parse(localStorage.getItem("reservations")) || [];
+
+    const currentUser =
+      JSON.parse(localStorage.getItem("hotelUser"));
+
+    const newReservation = {
+     ...formData,
+     roomTitle,
+     roomId,
+     userEmail: currentUser?.email,
+  };
+
+   localStorage.setItem(
+     "reservations",
+     JSON.stringify([
+     ...existingReservations,
+     newReservation,
+      ])
+  );
 
         setFormData({
           fullName: "",

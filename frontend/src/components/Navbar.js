@@ -1,4 +1,5 @@
 import React from "react";
+import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import {
   AppBar,
@@ -8,7 +9,10 @@ import {
   Box,
 } from "@mui/material";
 
+
 function Navbar() {
+  const { user, logout } = useAuth();
+
   return (
     <AppBar position="absolute" sx={{ background: "transparent", boxShadow: "none" }}>
       <Toolbar>
@@ -22,21 +26,40 @@ function Navbar() {
           LuxeStay
         </Typography>
 
-        <Box>
-          <Button color="inherit" component={Link} to="/">
-           Home
-          </Button>
+       <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+  {user ? (
+    <>
+      <Typography>
+        {user.fullName || user.email}
+      </Typography>
 
-          <Button color="inherit" component={Link} to="/rooms">
-          Rooms
-           </Button>
-          <Button color="inherit" component={Link} to="/membership">
-            Membership
-          </Button>
-          <Button color="inherit" component={Link} to="/login">
-            Login
-          </Button>
-        </Box>
+      <Button
+        color="inherit"
+        onClick={logout}
+      >
+        Logout
+      </Button>
+    </>
+  ) : (
+    <>
+      <Button
+        color="inherit"
+        component={Link}
+        to="/login"
+      >
+        Login
+      </Button>
+
+      <Button
+        variant="contained"
+        component={Link}
+        to="/signup"
+      >
+        Sign Up
+      </Button>
+    </>
+  )}
+     </Box>
       </Toolbar>
     </AppBar>
   );

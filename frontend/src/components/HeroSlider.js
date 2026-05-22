@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import { Box, Typography, Button, Paper, Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -10,6 +11,8 @@ const images = [hero1, hero2, hero3];
 
 function HeroSlider() {
   const [currentImage, setCurrentImage] = useState(0);
+
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,6 +32,7 @@ function HeroSlider() {
         position: "relative",
       }}
     >
+      {/* DARK OVERLAY */}
       <Box
         sx={{
           position: "absolute",
@@ -37,6 +41,7 @@ function HeroSlider() {
         }}
       />
 
+      {/* TOP NAVBAR */}
       <Box
         sx={{
           position: "absolute",
@@ -56,17 +61,70 @@ function HeroSlider() {
           LuxeStay
         </Typography>
 
-        <Box sx={{ display: "flex", gap: 5, alignItems: "center" }}>
+        <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
           <Typography>Hotels & Resorts</Typography>
-          <Typography component={Link} to="/rooms" sx={{ color: "white", textDecoration: "none" }}>
+
+          <Typography
+            component={Link}
+            to="/rooms"
+            sx={{
+              color: "white",
+              textDecoration: "none",
+            }}
+          >
             Rooms & Suites
           </Typography>
+
           <Typography>Restaurants</Typography>
+
           <Typography>Wellness</Typography>
+
           <Typography>Events</Typography>
+
+          {user ? (
+            <>
+              <Typography>
+                {user.fullName || user.email}
+              </Typography>
+
+              <Button
+                color="inherit"
+                component={Link}
+                to="/my-reservations"
+              >
+                My Reservations
+              </Button>
+
+              <Button
+                color="inherit"
+                onClick={logout}
+              >
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                color="inherit"
+                component={Link}
+                to="/login"
+              >
+                Login
+              </Button>
+
+              <Button
+                variant="contained"
+                component={Link}
+                to="/signup"
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
         </Box>
       </Box>
 
+      {/* HERO CONTENT */}
       <Box
         sx={{
           position: "absolute",
@@ -81,16 +139,29 @@ function HeroSlider() {
         </Typography>
 
         <Box sx={{ display: "flex", gap: 3 }}>
-          <Typography component={Link} to="/rooms" sx={{ color: "white", textDecoration: "underline" }}>
+          <Typography
+            component={Link}
+            to="/rooms"
+            sx={{
+              color: "white",
+              textDecoration: "underline",
+            }}
+          >
             Rooms & Suites
           </Typography>
 
-          <Typography sx={{ color: "white", textDecoration: "underline" }}>
+          <Typography
+            sx={{
+              color: "white",
+              textDecoration: "underline",
+            }}
+          >
             Contact Us
           </Typography>
         </Box>
       </Box>
 
+      {/* BOOKING BAR */}
       <Paper
         elevation={6}
         sx={{
@@ -111,7 +182,10 @@ function HeroSlider() {
           <Typography variant="body2" color="text.secondary">
             Dates
           </Typography>
-          <Typography variant="h6">Entry - Exit</Typography>
+
+          <Typography variant="h6">
+            Entry - Exit
+          </Typography>
         </Box>
 
         <Divider orientation="vertical" flexItem />
@@ -120,7 +194,10 @@ function HeroSlider() {
           <Typography variant="body2" color="text.secondary">
             Room and Guests
           </Typography>
-          <Typography variant="h6">1 Adult, 0 Children</Typography>
+
+          <Typography variant="h6">
+            1 Adult, 0 Children
+          </Typography>
         </Box>
 
         <Divider orientation="vertical" flexItem />
@@ -129,7 +206,10 @@ function HeroSlider() {
           <Typography variant="body2" color="text.secondary">
             Code
           </Typography>
-          <Typography variant="h6">Enter the code</Typography>
+
+          <Typography variant="h6">
+            Enter the code
+          </Typography>
         </Box>
 
         <Box sx={{ width: 280, p: 1.5 }}>
