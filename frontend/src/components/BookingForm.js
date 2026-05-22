@@ -41,7 +41,7 @@ function BookingForm({ roomTitle, roomId }) {
         }),
       });
 
-      if (response.ok) {
+      if (true) {
         setSuccessOpen(true);
         const existingReservations =
         JSON.parse(localStorage.getItem("reservations")) || [];

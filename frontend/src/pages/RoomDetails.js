@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
 import {
   Container,
   Typography,
@@ -76,7 +78,16 @@ function RoomDetails() {
       title: "Standard Room",
       price: 250,
       description: "Comfortable and affordable room for regular guests.",
-      images: [standardMain, standardBath],
+      images: [
+        {
+          original: standardMain,
+          thumbnail: standardMain,
+       },
+       {
+         original: standardBath,
+         thumbnail: standardBath,
+    },
+   ],
       amenities: completeAmenities,
     },
 
@@ -85,7 +96,16 @@ function RoomDetails() {
       price: 300,
       description:
         "A comfortable room with double bed space, ideal for couples or friends.",
-      images: [doubleMain, doubleBath],
+      images: [
+        {
+          original: doubleMain,
+          thumbnail: doubleMain,
+        },
+        {
+          original: doubleBath,
+          thumbnail: doubleBath,
+        },
+      ],
       amenities: completeAmenities,
     },
 
@@ -94,7 +114,16 @@ function RoomDetails() {
       price: 500,
       description:
         "Spacious room with elegant interior and premium comfort.",
-      images: [deluxeMain, deluxeBath],
+      images: [
+        {
+          original: deluxeMain,
+          thumbnail: deluxeMain,
+        },
+        {
+          original: deluxeBath,
+          thumbnail: deluxeBath,
+        },
+      ],
       amenities: completeAmenities,
     },
 
@@ -102,7 +131,16 @@ function RoomDetails() {
       title: "Executive Room",
       price: 700,
       description: "Luxury room designed for business and VIP guests.",
-      images: [executiveMain, executiveBath],
+      images: [
+        {
+          original: executiveMain,
+          thumbnail: executiveMain,
+        },
+        {
+          original: executiveBath,
+          thumbnail: executiveBath,
+        },
+      ],
       amenities: completeAmenities,
     },
 
@@ -111,7 +149,20 @@ function RoomDetails() {
       price: 1200,
       description:
         "Exclusive luxury suite with premium amenities and executive comfort.",
-      images: [presidentialMain, presidentialBath, presidentialLiving],
+      images: [
+        {
+          original: presidentialMain,
+          thumbnail: presidentialMain,
+        },
+        {
+          original: presidentialBath,
+          thumbnail: presidentialBath,
+        },
+        {
+          original: presidentialLiving,
+          thumbnail: presidentialLiving,
+        },
+      ],
       amenities: completeAmenities,
     },
   };
