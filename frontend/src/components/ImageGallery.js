@@ -1,45 +1,126 @@
-import React from "react";
-import { Box } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Dialog, IconButton } from "@mui/material";
 
-function ImageGallery({ images }) {
+import CloseIcon from "@mui/icons-material/Close";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
+function ImageGallery({ images = [] }) {
+  const [open, setOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0);
+
+  function handleOpen(index) {
+    setSelectedImage(index);
+    setOpen(true);
+  }
+
+  function handleNext() {
+    setSelectedImage((prev) =>
+      prev === images.length - 1 ? 0 : prev + 1
+    );
+  }
+
+  function handlePrev() {
+    setSelectedImage((prev) =>
+      prev === 0 ? images.length - 1 : prev - 1
+    );
+  }
+
+  if (!images.length) {
+    return null;
+  }
+
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: { xs: "1fr", md: "2fr 1fr" },
-        gap: 2,
-        mb: 4,
-      }}
-    >
+    <>
       <Box
-        component="img"
-        src={images[0]}
-        alt="Main room"
         sx={{
-          width: "100%",
-          height: 600,
-          objectFit: "cover",
-          borderRadius: 3,
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: 2,
+          mb: 4,
         }}
-      />
+      >
+        <Box
+          component="img"
+          src={images[0]}
+          alt="Main room"
+          onClick={() => handleOpen(0)}
+          sx={{
+            width: "100%",
+            height: 700,
+            objectFit: "cover",
+            borderRadius: 3,
+            cursor: "pointer",
+          }}
+        />
+      </Box>
 
-      <Box sx={{ display: "grid", gap: 2 }}>
-        {images.slice(1, 3).map((image, index) => (
-          <Box
-            key={index}
-            component="img"
-            src={image}
-            alt={`Room view ${index + 1}`}
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        maxWidth="xl"
+        fullWidth
+      >
+        <Box
+          sx={{
+            position: "relative",
+            backgroundColor: "black",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "90vh",
+          }}
+        >
+          <IconButton
+            onClick={() => setOpen(false)}
             sx={{
-              width: "100%",
-              height: 290,
-              objectFit: "cover",
-              borderRadius: 3,
+              position: "absolute",
+              top: 20,
+              right: 20,
+              color: "white",
+              zIndex: 10,
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+
+          <IconButton
+            onClick={handlePrev}
+            sx={{
+              position: "absolute",
+              left: 20,
+              color: "white",
+              zIndex: 10,
+            }}
+          >
+            <ArrowBackIosNewIcon />
+          </IconButton>
+
+          <Box
+            component="img"
+            src={images[selectedImage]}
+            alt="Expanded room"
+            sx={{
+              width: "90%",
+              maxHeight: "85vh",
+              objectFit: "contain",
             }}
           />
-        ))}
-      </Box>
-    </Box>
+
+          <IconButton
+            onClick={handleNext}
+            sx={{
+              position: "absolute",
+              right: 20,
+              color: "white",
+              zIndex: 10,
+            }}
+          >
+            <ArrowForwardIosIcon />
+          </IconButton>
+        </Box>
+      </Dialog>
+    </>
   );
 }
 
