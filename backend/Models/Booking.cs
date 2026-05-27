@@ -17,5 +17,13 @@ namespace backend.Models
         public int RoomId { get; set; }
 
         public Room? Room { get; set; }
+
+        public int? UserId { get; set; }
+
+        public User? User { get; set; }
+
+        public string Status { get; set; } = "Pending";
+
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

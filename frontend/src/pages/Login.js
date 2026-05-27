@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Container,
   TextField,
   Button,
@@ -14,6 +15,8 @@ import { useAuth } from "../context/AuthContext";
 function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -27,19 +30,24 @@ function Login() {
     });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    setError("");
 
-    login({
-      email: formData.email,
-    });
-
-    navigate("/");
+    try {
+      setSubmitting(true);
+      await login(formData);
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 10 }}>
-      <Paper sx={{ p: 5 }}>
+    <Container maxWidth="sm" sx={{ mt: { xs: 5, md: 10 } }}>
+      <Paper sx={{ p: { xs: 3, md: 5 }, border: 1, borderColor: "divider" }} elevation={0}>
         <Typography
           variant="h4"
           fontWeight="bold"
@@ -47,6 +55,12 @@ function Login() {
         >
           Login
         </Typography>
+
+        {error && (
+          <Alert severity="error" sx={{ mb: 3 }}>
+            {error}
+          </Alert>
+        )}
 
         <Box
           component="form"
@@ -79,9 +93,14 @@ function Login() {
             type="submit"
             variant="contained"
             size="large"
+            disabled={submitting}
           >
-            Login
+            {submitting ? "Logging in..." : "Login"}
           </Button>
+
+          <Typography color="text.secondary">
+            Demo admin: admin@luxestay.edu / admin123
+          </Typography>
         </Box>
       </Paper>
     </Container>

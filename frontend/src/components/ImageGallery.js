@@ -35,7 +35,7 @@ function ImageGallery({ images = [] }) {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "1fr",
+          gridTemplateColumns: { xs: "1fr", md: "1.6fr 1fr" },
           gap: 2,
           mb: 4,
         }}
@@ -47,12 +47,36 @@ function ImageGallery({ images = [] }) {
           onClick={() => handleOpen(0)}
           sx={{
             width: "100%",
-            height: 700,
+            height: { xs: 320, sm: 440, md: 540 },
             objectFit: "cover",
-            borderRadius: 3,
+            borderRadius: 2,
             cursor: "pointer",
           }}
         />
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: 2,
+          }}
+        >
+          {images.slice(1, 3).map((image, index) => (
+            <Box
+              key={image}
+              component="img"
+              src={image}
+              alt="Room view"
+              onClick={() => handleOpen(index + 1)}
+              sx={{
+                width: "100%",
+                height: { xs: 180, md: 262 },
+                objectFit: "cover",
+                borderRadius: 2,
+                cursor: "pointer",
+              }}
+            />
+          ))}
+        </Box>
       </Box>
 
       <Dialog

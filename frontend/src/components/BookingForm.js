@@ -6,76 +6,101 @@ import {
   Typography,
   Alert,
   Snackbar,
+  Stack,
 } from "@mui/material";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { createBooking } from "../services/bookingService";
+import { getDateInputValue, getNextDateInput } from "../utils/dateInput";
 
-function BookingForm({ roomTitle, roomId }) {
+function BookingForm({ room, initialBooking, onSuccess }) {
+  const { user } = useAuth();
   const [successOpen, setSuccessOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    checkInDate: "",
-    checkOutDate: "",
-    guests: 1,
+    fullName: user?.fullName || "",
+    email: user?.email || "",
+    checkInDate: initialBooking?.checkInDate || "",
+    checkOutDate: initialBooking?.checkOutDate || "",
+    guests: initialBooking?.guests || 1,
   });
 
   function handleChange(e) {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    const { name, value } = e.target;
+
+    setFormData((currentForm) => {
+      const nextForm = {
+        ...currentForm,
+        [name]: value,
+      };
+
+      if (
+        name === "checkInDate" &&
+        nextForm.checkOutDate &&
+        nextForm.checkOutDate <= value
+      ) {
+        nextForm.checkOutDate = "";
+      }
+
+      return nextForm;
     });
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setError("");
+
+    if (!user) {
+      setError("Please log in before booking a room.");
+      return;
+    }
+
+    if (!formData.checkInDate || !formData.checkOutDate) {
+      setError("Please choose check-in and check-out dates.");
+      return;
+    }
+
+    if (formData.checkOutDate <= formData.checkInDate) {
+      setError("Check-out date must be after check-in date.");
+      return;
+    }
 
     try {
-      const response = await fetch("http://localhost:5230/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          roomId: roomId,
-        }),
+      setSubmitting(true);
+      const booking = await createBooking({
+        ...formData,
+        guests: Number(formData.guests),
+        roomId: room.id,
+        userId: user.id,
       });
+      const message = `Booking request sent for ${room.title}.`;
 
-      if (true) {
-        setSuccessOpen(true);
-        const existingReservations =
-        JSON.parse(localStorage.getItem("reservations")) || [];
-
-    const currentUser =
-      JSON.parse(localStorage.getItem("hotelUser"));
-
-    const newReservation = {
-     ...formData,
-     roomTitle,
-     roomId,
-     userEmail: currentUser?.email,
-  };
-
-   localStorage.setItem(
-     "reservations",
-     JSON.stringify([
-     ...existingReservations,
-     newReservation,
-      ])
-  );
-
-        setFormData({
-          fullName: "",
-          email: "",
-          checkInDate: "",
-          checkOutDate: "",
-          guests: 1,
-        });
-      }
+      setSuccessMessage(message);
+      setSuccessOpen(true);
+      setFormData({
+        fullName: user?.fullName || "",
+        email: user?.email || "",
+        checkInDate: initialBooking?.checkInDate || "",
+        checkOutDate: initialBooking?.checkOutDate || "",
+        guests: initialBooking?.guests || 1,
+      });
+      setSubmitting(false);
+      onSuccess?.({ booking, message });
     } catch (error) {
-      console.error(error);
+      setError(error.message);
+      setSubmitting(false);
     }
   }
+
+  if (!room) {
+    return null;
+  }
+
+  const todayInput = getDateInputValue(new Date());
+  const checkOutMin = getNextDateInput(formData.checkInDate || todayInput);
 
   return (
     <>
@@ -93,12 +118,24 @@ function BookingForm({ roomTitle, roomId }) {
           Book This Room
         </Typography>
 
-        <Typography
-          variant="h6"
-          color="text.secondary"
-        >
-          Selected Room: {roomTitle}
+        <Typography variant="h6" color="text.secondary">
+          Selected Room: {room.title}
         </Typography>
+
+        {!user && (
+          <Alert
+            severity="info"
+            action={
+              <Button color="inherit" component={Link} to="/login">
+                Login
+              </Button>
+            }
+          >
+            A member account is required to save and manage reservations.
+          </Alert>
+        )}
+
+        {error && <Alert severity="error">{error}</Alert>}
 
         <TextField
           label="Full Name"
@@ -117,25 +154,35 @@ function BookingForm({ roomTitle, roomId }) {
           required
         />
 
-        <Box sx={{ display: "flex", gap: 2 }}>
+        <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
           <TextField
             fullWidth
-            type="date"
-            helperText="Check-in Date"
+            label="Check-in Date"
             name="checkInDate"
+            type="date"
             value={formData.checkInDate}
             onChange={handleChange}
+            slotProps={{
+              inputLabel: { shrink: true },
+              htmlInput: { min: todayInput },
+            }}
+            required
           />
 
           <TextField
             fullWidth
-            type="date"
-            helperText="Check-out Date"
+            label="Check-out Date"
             name="checkOutDate"
+            type="date"
             value={formData.checkOutDate}
             onChange={handleChange}
+            slotProps={{
+              inputLabel: { shrink: true },
+              htmlInput: { min: checkOutMin },
+            }}
+            required
           />
-        </Box>
+        </Stack>
 
         <TextField
           label="Guests"
@@ -143,6 +190,7 @@ function BookingForm({ roomTitle, roomId }) {
           type="number"
           value={formData.guests}
           onChange={handleChange}
+          slotProps={{ htmlInput: { min: 1, max: room.capacity || 8 } }}
           required
         />
 
@@ -150,8 +198,9 @@ function BookingForm({ roomTitle, roomId }) {
           type="submit"
           variant="contained"
           size="large"
+          disabled={!user || submitting}
         >
-          Book Now
+          {submitting ? "Saving..." : "Book Now"}
         </Button>
       </Box>
 
@@ -165,7 +214,7 @@ function BookingForm({ roomTitle, roomId }) {
           variant="filled"
           onClose={() => setSuccessOpen(false)}
         >
-          Booking successful!
+          {successMessage || "Booking successful!"}
         </Alert>
       </Snackbar>
     </>

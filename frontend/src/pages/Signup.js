@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Container,
   TextField,
   Button,
@@ -13,7 +14,9 @@ import { useAuth } from "../context/AuthContext";
 
 function Signup() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { signup } = useAuth();
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -28,20 +31,24 @@ function Signup() {
     });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    setError("");
 
-    login({
-      fullName: formData.fullName,
-      email: formData.email,
-    });
-
-    navigate("/");
+    try {
+      setSubmitting(true);
+      await signup(formData);
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 10 }}>
-      <Paper sx={{ p: 5 }}>
+    <Container maxWidth="sm" sx={{ mt: { xs: 5, md: 10 } }}>
+      <Paper sx={{ p: { xs: 3, md: 5 }, border: 1, borderColor: "divider" }} elevation={0}>
         <Typography
           variant="h4"
           fontWeight="bold"
@@ -49,6 +56,12 @@ function Signup() {
         >
           Create Account
         </Typography>
+
+        {error && (
+          <Alert severity="error" sx={{ mb: 3 }}>
+            {error}
+          </Alert>
+        )}
 
         <Box
           component="form"
@@ -89,8 +102,9 @@ function Signup() {
             type="submit"
             variant="contained"
             size="large"
+            disabled={submitting}
           >
-            Sign Up
+            {submitting ? "Creating..." : "Sign Up"}
           </Button>
         </Box>
       </Paper>

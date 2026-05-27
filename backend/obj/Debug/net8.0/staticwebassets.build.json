@@ -1,11 +1,58 @@
 {
   "Version": 1,
-  "Hash": "7/yvsnDRTixX0vVer35KSjS1HzfM4rGxA/gc1emwSdw=",
+  "Hash": "/y4NEox4WMQa+aD5LUnu8/mMiPUmb/w9ppXgYM7VPEw=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "backend/wwwroot",
+      "Source": "backend",
+      "ContentRoot": "/Users/favourokwudili/Desktop/repos/Hotel_Reservation_System/backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/favourokwudili/Desktop/repos/Hotel_Reservation_System/backend/wwwroot/uploads/.gitkeep",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/favourokwudili/Desktop/repos/Hotel_Reservation_System/backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "RelativePath": "uploads/.gitkeep",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/.gitkeep"
+    },
+    {
+      "Identity": "/Users/favourokwudili/Desktop/repos/Hotel_Reservation_System/backend/wwwroot/uploads/860748170d724c0b9b2259adc467fc67.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/favourokwudili/Desktop/repos/Hotel_Reservation_System/backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "RelativePath": "uploads/860748170d724c0b9b2259adc467fc67.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/860748170d724c0b9b2259adc467fc67.png"
+    }
+  ]
 }
