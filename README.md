@@ -16,6 +16,7 @@ A modern full-stack Hotel Reservation System built with React, Material UI, ASP.
 - Complaint/request form with request tracking
 - Realistic footer with hotel details, quick links, contact info, and newsletter field
 
+
 ## Demo Admin
 
 - Email: `admin@luxestay.edu`
@@ -42,3 +43,7 @@ By default, the frontend calls the backend at `http://localhost:5230/api`.
 ## Notes
 
 This is a school-project implementation, not a production deployment. Authentication is intentionally simple and designed for demonstrating membership, reservations, and admin workflows.
+
+## Author
+
+Favour Okwudili Computer Engineering Student
