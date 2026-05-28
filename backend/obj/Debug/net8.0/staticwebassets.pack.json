@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets/uploads/860748170d724c0b9b2259adc467fc67.png"
     },
     {
+      "Id": "/Users/favourokwudili/Desktop/repos/Hotel_Reservation_System/backend/wwwroot/uploads/c7e74b6fc71648c2811af7934740f5eb.jpg",
+      "PackagePath": "staticwebassets/uploads/c7e74b6fc71648c2811af7934740f5eb.jpg"
+    },
+    {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.backend.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

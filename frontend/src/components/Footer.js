@@ -94,11 +94,11 @@ function Footer() {
             <Stack spacing={1.2} color="text.secondary">
               <Stack direction="row" spacing={1.2}>
                 <LocationOnIcon fontSize="small" />
-                <Typography variant="body2">Sultanahmet, Istanbul</Typography>
+                <Typography variant="body2">Kadikoy, Istanbul</Typography>
               </Stack>
               <Stack direction="row" spacing={1.2}>
                 <PhoneIcon fontSize="small" />
-                <Typography variant="body2">+90 212 555 0184</Typography>
+                <Typography variant="body2">+90 212 111 0000</Typography>
               </Stack>
               <Stack direction="row" spacing={1.2}>
                 <EmailIcon fontSize="small" />

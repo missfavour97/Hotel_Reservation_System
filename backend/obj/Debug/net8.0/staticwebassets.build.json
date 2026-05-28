@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/y4NEox4WMQa+aD5LUnu8/mMiPUmb/w9ppXgYM7VPEw=",
+  "Hash": "75385wJ0p/nyK5XgGgpKE/wE9icQmLFkniEUOZacoQg=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/860748170d724c0b9b2259adc467fc67.png"
+    },
+    {
+      "Identity": "/Users/favourokwudili/Desktop/repos/Hotel_Reservation_System/backend/wwwroot/uploads/c7e74b6fc71648c2811af7934740f5eb.jpg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/favourokwudili/Desktop/repos/Hotel_Reservation_System/backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "RelativePath": "uploads/c7e74b6fc71648c2811af7934740f5eb.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/c7e74b6fc71648c2811af7934740f5eb.jpg"
     }
   ]
 }
