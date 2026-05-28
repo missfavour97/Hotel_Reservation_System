@@ -16,7 +16,7 @@ A modern full-stack Hotel Reservation System built with React, Material UI, ASP.
 - Complaint/request form with request tracking
 - Realistic footer with hotel details, quick links, contact info, and newsletter field
 
-## Scrrenshots
+## Screenshots
 ![Homepage](../Hotel_Reservation_System/frontend/public/images/homepage.png)
 ![Rooms](../Hotel_Reservation_System/frontend/public/images/rooms.png)
 ![Admin](../Hotel_Reservation_System/frontend/public/images/admin.png)
