@@ -18,16 +18,16 @@ A modern full-stack Hotel Reservation System built with React, Material UI, ASP.
 
 ## Screenshots
 ![Homepage](./frontend/public/images/homepage.png)
-![Rooms](../Hotel_Reservation_System/frontend/public/images/rooms.png)
-![Admin](../Hotel_Reservation_System/frontend/public/images/admin.png)
-![Reservation](../Hotel_Reservation_System/frontend/public/images/reservation%20.png)
-![Featured](../Hotel_Reservation_System/frontend/public/images/featured.png)
-![Footer](../Hotel_Reservation_System/frontend/public/images/footer.png)
-![Form](../Hotel_Reservation_System/frontend/public/images/form.png)
-![Login](../Hotel_Reservation_System/frontend/public/images/login.png)
-![Complaint](../Hotel_Reservation_System/frontend/public/images/complaint.png)
-![DarkMode](../Hotel_Reservation_System/frontend/public/images/darkmode.png)
-![Mobile](../Hotel_Reservation_System/frontend/public/images/mobile.png)
+![Rooms](./frontend/public/images/rooms.png)
+![Admin](./frontend/public/images/admin.png)
+![Reservation](./frontend/public/images/reservation%20.png)
+![Featured](./frontend/public/images/featured.png)
+![Footer](./frontend/public/images/footer.png)
+![Form](./frontend/public/images/form.png)
+![Login](./frontend/public/images/login.png)
+![Complaint](./frontend/public/images/complaint.png)
+![DarkMode](./frontend/public/images/darkmode.png)
+![Mobile](./frontend/public/images/mobile.png)
 
 
 
